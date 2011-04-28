@@ -4,6 +4,7 @@ from brains.namelist.models import Player, Category
 from brains.mapping.models import Location, Report
 from redis import Redis
 import json
+import cPickle as pickle
 
 redis = Redis(db=6)
 
@@ -26,12 +27,15 @@ def find_players(fuckers, msg=None, reply=None):
 @hook.command('udbreport')
 def get_report(coords):
     coords = [coord.strip() for coord in coords.split(',')]
-    try:
-        loc = Location.objects.get(x=coords[0], y=coords[1])
-        report = loc.report_set.order_by('reported_date')[0]
-    except Exception, e:
-        return "No reports"
-    return report
+    report = redis.get('location:{0}:{1}'.format(*coords))
+    if report:
+        report = json.loads(report)
+        age = unicode(datetime.datetime.now() - pickle.loads(report['report_date']))
+        return '[{}, {}] - Zombies: {}, Survivors: {}, Barricades: {} ({} ago)'.format(
+            coords[0], coords[1], report['zombies'], report['survivor_count'], 
+            report['barricades'], age)
+    else:
+        return "No report for [{},{}]".format(*coords)
 
 
 @hook.command('udblastreport')
