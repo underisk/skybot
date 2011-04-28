@@ -41,7 +41,7 @@ def get_report(coords):
 @hook.command('udblastreport')
 def last_report(ignore):
     try:
-        last = Report.objects.order_by('reported_date')[0]
+        last = Report.objects.order_by('-reported_date',zombies_only=False)[0]
     except Exception, e:
         return "No reports"
     return last
