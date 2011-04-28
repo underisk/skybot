@@ -43,7 +43,7 @@ def last_report(ignore):
     return last
 
 
-@hook.command('udbmark')
+@hook.command('udbmark',adminonly=True)
 def mark_player(mark):
     player, group = [val.strip() for val in mark.split('=')]
     try:

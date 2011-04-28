@@ -1,0 +1,27 @@
+{
+  "connections":
+  {
+    "urbandead":
+    {
+      "server": "irc.synirc.net",
+      "nick": "brainsbot",
+      "channels": ["#urbandead"]
+    }
+  },
+  "admins": ["Xenos", "underisk", "kimihia", "FuegoFish", "LaughingMan"],
+  "disabled_plugins": [],
+  "disabled_commands": [],
+  "acls": {},
+  "censored_strings":
+  [
+    "DCC SEND",
+    "1nj3ct",
+    "thewrestlinggame",
+    "startkeylogger",
+    "hybux",
+    "\\0",
+    "\\x01",
+    "!coz",
+    "!tell /x"
+  ]
+}
