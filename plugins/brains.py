@@ -14,7 +14,7 @@ def find_players(fuckers, msg=None, reply=None):
     ids = []
     for player in fuckers:
         try:
-            ids.append(Player.objects.get(name__icontains=player).id)
+            ids.append(Player.objects.get(name=player).id)
         except Exception, e:
             reply("Could not find: {}".format(player))
         
@@ -51,7 +51,7 @@ def mark_player(mark):
     except Exception, e:
         return "Invalid group"
     try:
-        player = Player.objects.get(name__icontains=player)
+        player = Player.objects.get(name=player)
     except Exception, e:
         return "Invalid player"    
     return "{} changed to {}".format(player, group)
