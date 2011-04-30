@@ -5,6 +5,7 @@ from brains.mapping.models import Location, Report
 from redis import Redis
 import json
 import cPickle as pickle
+import datetime
 
 redis = Redis(db=6)
 
