@@ -52,7 +52,7 @@ def last_report(ignore):
 def mark_player(mark):
     player, category = [val.strip() for val in mark.split('=')]
     try:
-        category = Category.objects.get(name=group)
+        category = Category.objects.get(name=category)
     except Exception, e:
         return "Invalid group"
     try:
