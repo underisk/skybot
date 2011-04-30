@@ -49,16 +49,18 @@ def last_report(ignore):
 
 @hook.command('udbmark',adminonly=True)
 def mark_player(mark):
-    player, group = [val.strip() for val in mark.split('=')]
+    player, category = [val.strip() for val in mark.split('=')]
     try:
-        group = Category.objects.get(name=group)
+        category = Category.objects.get(name=group)
     except Exception, e:
         return "Invalid group"
     try:
         player = Player.objects.get(name=player)
     except Exception, e:
-        return "Invalid player"    
-    return "{} changed to {}".format(player, group)
+        return "Invalid player" 
+    player.category = category
+    player.save()
+    return "{} changed to {}".format(player, category)
 
 
 @hook.command('udbtrees')
