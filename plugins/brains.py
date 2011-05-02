@@ -17,7 +17,7 @@ def find_players(fuckers, msg=None, reply=None):
     for player in fuckers:
         try:
             ids.append(Player.objects.get(name=player).id)
-        except Exception, e:
+        except Player.DoesNotExist:
             reply("Could not find: {}".format(player))
         
     jerks = Player.objects.filter(id__in=ids)
