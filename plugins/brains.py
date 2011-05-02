@@ -16,7 +16,7 @@ def find_players(fuckers, msg=None, reply=None):
     jerks = []
     for player in fuckers:
         try:
-            jerks.append(Player.objects.get(name=player))
+            jerks.append(Player.objects.get(name__istartswith=player))
         except Player.DoesNotExist:
             reply("Could not find: {}".format(player))
 
