@@ -13,14 +13,13 @@ redis = Redis(db=6)
 @hook.command('udbfind')
 def find_players(fuckers, msg=None, reply=None):
     fuckers = [fucker.strip() for fucker in fuckers.split(',')]
-    ids = []
+    jerks = []
     for player in fuckers:
         try:
-            ids.append(Player.objects.get(name=player).id)
+            jerks.append(Player.objects.get(name=player))
         except Player.DoesNotExist:
             reply("Could not find: {}".format(player))
-        
-    jerks = Player.objects.filter(id__in=ids)
+
     for jerk in jerks:
         reply(' - '.join([jerk.name, unicode(jerk.last_known_position())])) 
 
