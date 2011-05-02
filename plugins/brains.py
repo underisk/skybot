@@ -15,10 +15,11 @@ def find_players(fuckers, msg=None, reply=None):
     fuckers = [fucker.strip() for fucker in fuckers.split(',')]
     jerks = []
     for player in fuckers:
-        try:
-            jerks.append(Player.objects.get(name__istartswith=player))
-        except Player.DoesNotExist:
+        new_jerks = Player.objects.filter(name__istartswith=player)[:5]
+        if new_jerks.count() == 0:
             reply("Could not find: {}".format(player))
+        else:
+            jerks.extend(list(new_jerks[:5]))
 
     for jerk in jerks:
         reply(' - '.join([jerk.name, unicode(jerk.last_known_position())])) 
